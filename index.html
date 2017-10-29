@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>1028_class</title>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    
+</head>
+<body>
+    
+   
+
+    <script>
+        
+        
+//    var arr = [85, 60, 99, 49, 77, 59];
+//    var body=d3.select("body");
+//    for(var i=0 ; i<arr.length ; i++ ){
+//        body.append("div")
+//            .datum(arr[i]) 
+//        }
+//        
+//        d3.selectAll("div").text(function(data1)
+//            {return data1;}) 
+//        
+//        console.log(d3.selectAll("div") );
+    
+ 
+//        
+//    var arr = [85, 60, 99, 49, 77, 59];
+//    var body=d3.select("body");
+//        body.selectAll("div")
+//        .data(arr);
+//        
+//         d3.selectAll("div")
+//             .text(function(data1)
+//            {return data1;
+//            }) 
+//        
+//         console.log(d3.selectAll("div") );
+
+//      var arr = [85, 60, 99, 49, 77, 59];
+//      bind(arr);
+//      render();  
+//        
+//        function bind(arr){
+//                
+//                var body=d3.select("body");  
+//        
+//                var selection=body.selectAll("div")
+//                                  .data(arr);
+//        
+//                selection.enter().append("div");
+//                selection.exit().remove("div");}
+//        
+//      
+//        function render(){ d3.selectAll("div")
+//                             .text(function(d,i)
+//                                   {return (i+1)+":"+d;
+//                          }).style({"color":function(d){
+//                                            if(d<70){return"red"}
+//                                            else{return"black"}
+//                                                        }
+//                                
+//                                    }) 
+//                         }
+//       
+        
+//      console.log(d3.selectAll("div") );  
+       
+         
+    
+    </script>
+  
+   
+     
+ <input type="button" value="Add"
+        onclick= "update()" style="position:relative; left:220px; top: -20px; " >
+ <input type="button" value="Remove"
+        onclick="kickitem()"  style="position:relative;  left:240px; top: -20px; ">  
+        
+    <script>
+        
+    function random(N,M){
+        return Math.floor(Math.random()*(M-N+1)+N);
+    }    
+    function update(){
+        var num = random(10,100);
+        arr.push(num);
+        bind(arr);
+        render();
+        
+    }    
+    function kickitem(){
+        var num = random(10,100);
+        arr.shift(num);
+        bind(arr);
+        render();
+        
+    }        
+        
+    var arr = [85, 60, 99, 49, 77, 59];
+    var w = 500 , h = 300 , p=100 ;
+        
+    svg();
+    bind(arr);
+    render();
+    
+    function svg(){
+        d3.select("body").append("svg")
+            .attr({
+            "id":"barchart",
+            "width":w,
+            "height":h 
+        })
+    }
+
+        
+    function bind(arr){
+        var svg=d3.select("#barchart"); 
+        var selection=svg.selectAll("rect")
+                         .data(arr);
+        selection.enter().append("rect");
+        selection.exit().remove();
+        
+        var selection_t=svg.selectAll("text")
+                         .data(arr);
+        selection_t.enter().append("text");
+        selection_t.exit().remove();}
+        
+
+        
+      
+        
+    function render(){ d3.selectAll("#barchart rect")
+                        .attr({
+                        x:function(d,i){
+                            return p+43*i;},
+                        y:function(d){
+                            return h-p-d },
+                        width:40 ,
+                        height:function(d){
+                                return d;},
+                        fill:function(d){
+                            if(d<70){
+                                return "red"
+                            }
+                            else{
+                                return"lightgreen"
+                            }
+                        }
+    })
+
+    d3.selectAll("#barchart text")
+                        .attr({
+                        x:function(d,i){
+                            return p+43*i+20;},
+                        y:h-p+20 ,
+                       "text-anchor" : "middle"
+                            }).text(function(d){
+                                    return d;
+    })
+                                 
+                     }
+       
+    
+        
+    
+        
+//      console.log(d3.selectAll("svg") );  
+           
+    
+    </script>
+
+
+
+
+
+</body>
+</html>
